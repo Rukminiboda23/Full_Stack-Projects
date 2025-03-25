@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(248, 248, 224) ; /* Light background for a clean look */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    background-color: #141313;
+    color: lightgoldenrodyellow;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between logo and navigation */
+}
+
+header .logo {
+
+    display: flex;
+    align-items: center;
+    
+}
+
+header .logo img {
+    height: 50px;
+    margin-right: 15px; /* Space between logo and store name */
+}
+
+header h1 {
+    margin: 0;
+    color: lightgoldenrodyellow;
+    font-size: 1.5em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: #ffd09b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+    color: #4c64ce;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    padding: 10px;
+}
+
+.item {
+    background-color: #4f4c4c;
+    color: #ffd09b;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.2em;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.item:hover {
+    transform: scale(1.05); /* Subtle zoom effect */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Soft shadow on hover */
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.item h4 {
+    font-family: 'Times New Roman', Times, serif;
+    color: lightyellow;
+    margin-bottom: 10px;
+}
+
+.item p {
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 15px;
+}
+
+.item button {
+    background-color: #4c64ce;
+    color: bisque;
+    padding: 8px 20px;
+    font-size: medium;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.item button:hover {
+    background-color: #3649b8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .item {
+        padding: 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .page {
+        grid-template-columns: 1fr;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
