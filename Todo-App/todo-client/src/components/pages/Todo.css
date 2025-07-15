@@ -16,6 +16,7 @@ body {
 .todo-container h2 {
   margin-bottom: 1.5rem;
   color: #333;
+  font-size: 2rem;
 }
 
 .todo-container input {

@@ -25,29 +25,47 @@ const User = mongoose.model("users", userSchema);
 app.post("/register", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userExists = await User.findOne({ email });
-    if (userExists) return res.send({ message: "User already exists" });
 
+    // Check if user already exists
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(409).json({ success: false, message: "User already exists" });
+    }
+
+    // Hash the password and create user
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({ email, password: hashedPassword });
-    res.send({ message: "User Registered" });
+
+    res.status(201).json({ success: true, message: "User registered successfully" });
   } catch (err) {
-    res.status(500).send({ message: "Registration error", error: err.message });
+    res.status(500).json({ success: false, message: "Registration error", error: err.message });
   }
 });
+
 
 // Login Route
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email, password });
+  try {
+    const user = await User.findOne({ email });
 
-  if (user) {
-    return res.status(200).json({ success: true });
-  } else {
-    return res.status(404).json({ success: false, message: "User not found" });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ success: false, message: "Invalid password" });
+    }
+
+    return res.status(200).json({ success: true, message: "Login successful" });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Login error", error: err.message });
   }
 });
+
 
 // Get Todos
 app.get("/todos", async (req, res) => {
